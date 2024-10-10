@@ -18,7 +18,7 @@ const GoogleMapSection = () => {
 
   const containerStyle = {
     width: "100%",
-    height: "400px",
+    height: "45vh",
   };
   
   const [center, setCenter] = useState({
@@ -28,10 +28,10 @@ const GoogleMapSection = () => {
 
   useEffect(() =>{
     if(source?.length!=[]&&map) {
-      map.penTo({
-        lat: destination.lat,
-        lng: destination.lng
-      })
+      // map.penTo({
+      //   lat: destination.lat,
+      //   lng: destination.lng
+      // }),
       setCenter({
         lat: source.lat,
         lng: source.lng
@@ -41,10 +41,10 @@ const GoogleMapSection = () => {
 
   useEffect(() =>{
     if(destination?.length!=[]&&map) {
-      map.penTo({
-        lat: destination.lat,
-        lng: destination.lng
-      })
+      // map.penTo({
+      //   lat: destination.lat,
+      //   lng: destination.lng
+      // }),
       setCenter({
         lat: destination.lat,
         lng: destination.lng
