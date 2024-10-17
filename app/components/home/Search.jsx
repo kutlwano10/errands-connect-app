@@ -1,7 +1,7 @@
 "use client"
 import InputItem from './InputItem'
-import pin from "../../public/pin.png"
-import Dropoff from "../../public/location.png"
+import pin from "../../../public/pin.png"
+import Dropoff from "../../../public/location.png"
 import { SourceContext } from '@/app/context/SourceContext'
 import { DestinationContext } from '@/app/context/DestinationContext'
 import react,{ useContext, useEffect } from 'react'

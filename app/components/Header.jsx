@@ -1,7 +1,7 @@
 import Image from "next/image"
-import logo from "../public/errands-logo2.png"
+import logo from "../../public/errands-logo2.png"
 import { UserButton } from "@clerk/nextjs"
-import packageIcon from "../public/package-figure3.png"
+import packageIcon from "../../public/package-figure3.png"
 
 const Header = () => {
   return (
