@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect } from "react";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import {useContext, useState, useCallback, memo } from "react";
+import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
+import { useContext, useState, useCallback, memo } from "react";
 import { SourceContext } from "@/app/context/SourceContext";
 import { DestinationContext } from "@/app/context/DestinationContext";
-
+import pin from "../../public/pin.png";
 const GoogleMapSection = () => {
   // const { isLoaded } = useJsApiLoader({
   //   id: "google-map-script",
@@ -13,44 +13,43 @@ const GoogleMapSection = () => {
   const { source } = useContext(SourceContext); // Correct use of context
   const { destination } = useContext(DestinationContext);
 
-
   const [map, setMap] = useState(null);
 
   const containerStyle = {
     width: "100%",
     height: "45vh",
   };
-  
+
   const [center, setCenter] = useState({
     lat: -3.745,
     lng: -38.523,
   });
 
-  useEffect(() =>{
-    if(source?.length!=[]&&map) {
-      // map.penTo({
-      //   lat: destination.lat,
-      //   lng: destination.lng
-      // }),
+  useEffect(() => {
+    if (source?.length != [] && map) {
+      map.panTo({
+        lat: source.lat,
+        lng: source.lng,
+      });
       setCenter({
         lat: source.lat,
-        lng: source.lng
-      })
+        lng: source.lng,
+      });
     }
-  },[source])
+  }, [source]);
 
-  useEffect(() =>{
-    if(destination?.length!=[]&&map) {
-      // map.penTo({
-      //   lat: destination.lat,
-      //   lng: destination.lng
-      // }),
+  useEffect(() => {
+    if (destination?.length != [] && map) {
+      map.panTo({
+        lat: destination.lat,
+        lng: destination.lng,
+      });
       setCenter({
         lat: destination.lat,
-        lng: destination.lng
-      })
+        lng: destination.lng,
+      });
     }
-  },[destination])
+  }, [destination]);
 
   const onLoad = useCallback(function callback(map) {
     // Ensure this runs only on the client
@@ -65,7 +64,7 @@ const GoogleMapSection = () => {
     setMap(null);
   }, []);
 
-  return  (
+  return (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
@@ -74,10 +73,20 @@ const GoogleMapSection = () => {
       onUnmount={onUnmount}
       options={{ mapId: "b2b3fd5fe35e2a2d" }}
     >
-      <></>
+      {source.length != [] ? (
+        <MarkerF
+          position={{ lat: source.lat, lng: source.lng }}
+          icon={{
+            url: "/pin.png",
+            scaledSize: {
+              width: 20,
+              height: 20,
+            },
+          }}
+        ></MarkerF>
+      ) : null}
     </GoogleMap>
-  ) 
+  );
 };
 
 export default memo(GoogleMapSection);
-
